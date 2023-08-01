@@ -35,11 +35,13 @@ class Datos:
         credenciales = os.path.join(self._path, self._credenciales)
         creds = None
 
-        if os.path.exists(token):
-            creds = Credentials.from_authorized_user_file(token, self._scopes)
+        try:
+            
+            if os.path.exists(token):
+                creds = Credentials.from_authorized_user_file(token, self._scopes)
 
         # Si no hay credenciales (válidas) disponibles, permite que el usuario inicie sesión.
-        try:
+
             if not creds or not creds.valid:
                 if creds and creds.expired and creds.refresh_token:
                     creds.refresh(Request())
@@ -52,7 +54,11 @@ class Datos:
                     token.write(creds.to_json())
         except:
             remove(token)
+            creds = Credentials.from_authorized_user_file(token, self._scopes)
             creds.refresh(Request())
+
+            flow = InstalledAppFlow.from_client_secrets_file(credenciales, self._scopes)
+            creds = flow.run_local_server(port=0)
 
             with open(token, 'w') as token:
                 token.write(creds.to_json())

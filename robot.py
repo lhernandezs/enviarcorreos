@@ -76,8 +76,8 @@ class Robot:
             if self._produccion:
                 fechaActual = date.today()
             else:
-                # fechaActual = date(2023,7,28) # para pruebas
-                fechaActual = date.today() # para pruebas
+                fechaActual = date(2023,7,31) # para pruebas
+                # fechaActual = date.today() # para pruebas
             diasLaborables = Anno(fechaActual.year).listaDiasLaborables()
 
             Log("NUEVA EJECUCION DEL ROBOT", "+++++")
