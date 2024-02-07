@@ -9,3 +9,6 @@ class Log:
             texto = '\n' + tipo + " -- " + str(mensaje).ljust(120,'.') + str(datetime.now())
             file.write(texto)
             file.close()
+
+if __name__ == "__main__":
+    l = Log("Hola.. estamos en 2024","Saludo")

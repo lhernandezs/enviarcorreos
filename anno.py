@@ -16,17 +16,17 @@ class Anno:
                             11 : [6, 13],
                             12 : [8, 25],
                         },
-                  2024: {   1 :  [8],
+                  2024: {   1 :  [1, 8],
                             2 :  [],
-                            3 :  [],
+                            3 :  [25, 28, 29],
                             4 :  [],
-                            5 :  [],
-                            6 :  [],
-                            7 :  [20],
-                            8 :  [7],
+                            5 :  [1, 13],
+                            6 :  [3, 10],
+                            7 :  [1, 20],
+                            8 :  [7, 19],
                             9 :  [],
-                            10 : [],
-                            11 : [],
+                            10 : [14],
+                            11 : [4, 11],
                             12 : [8, 25],
                         },
                 }
@@ -44,10 +44,10 @@ class Anno:
                 listaDiasNum.append([mes, dia, ind])
 
         listaDepurada = list(filter(lambda x: x[2] not in [5,6] and x[1]!= 0, listaDiasNum)) # se elminan los sabados y domingos. tambien elimina los ceros de relleno en listaDiasMes
-        listaFechas = list(map(lambda d: date(self._anno, d[0], d[1]), listaDepurada))
-        return list(filter(lambda f: f not in self.listaFestivos(), listaFechas))
+        listaFechas = list(map(lambda d: date(self._anno, d[0], d[1]), listaDepurada)) # convierte la listas de tuplas en fechas
+        return list(filter(lambda f: f not in self.listaFestivos(), listaFechas)) # filtra la listas de fechas quitando los festivos
 
-    # retorna la lista de dias Festivos del año correspondiente
+    # retorna la lista de dias festivos del año correspondiente
     def listaFestivos(self):
         festivos = []
         for mes in Anno.FESTIVOS[self._anno]:
@@ -57,7 +57,7 @@ class Anno:
 
     
 if __name__ == "__main__":
-    y = Anno(2023)
+    y = Anno(2024)
     for diaLaborable in y.listaDiasLaborables():
         print(diaLaborable) #imprime la lista de dias laborales del año
     print("--------------------------")

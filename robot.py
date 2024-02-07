@@ -3,7 +3,7 @@ import random
 import os
  
 from datos          import Datos
-from datetime       import date, datetime
+from datetime       import date
 from anno           import Anno
 from correo         import Correo
 from modelo         import Modelo
@@ -11,6 +11,7 @@ from log            import Log
 
 class Robot:
 
+    # constructor de la clase
     def __init__(self, produccion = False, passw = "1234"):
         self._produccion = produccion
         self._passw = passw
@@ -28,7 +29,7 @@ class Robot:
     
         self._datos = datos
 
-    # filtra las filas si tienen los datos de fechaInicio/Terminacion segun la fecha de inicio / terminacion 
+    # filtra las filas si tienen los datos de fechaInicio/Terminacion segun la fecha de inicio/terminacion 
     def filtroFichas(self, fila, fechaActual, fechaLabSig, alistamiento):
         if len(fila) == 12:
             indice = 10 if alistamiento else 11
@@ -46,9 +47,9 @@ class Robot:
                 if instructorAnterior != "":
 
                     if self._produccion: 
-                        time.sleep(random.randint(60, 240)) # detiene la ejeucón del envio de correo por unos minutos
+                        time.sleep(random.randint(60, 240)) # detiene la ejecucón del envio de correo por unos minutos
                     else:
-                        time.sleep(random.randint(0, 3)) # detiene la ejeucón del envio de correo por unos segundos
+                        time.sleep(random.randint(0, 3)) # detiene la ejecucón del envio de correo por unos segundos
                     
                     (emailIns, seremailIns) = emailD.split(sep = "@")
                     strFichas = ""
@@ -76,7 +77,8 @@ class Robot:
             if self._produccion:
                 fechaActual = date.today()
             else:
-               fechaActual = date.today() # para pruebas
+            #   fechaActual = date.today() # para pruebas
+               fechaActual = date(2023,11,21) # para pruebas
 
             diasLaborables = Anno(fechaActual.year).listaDiasLaborables()
 
